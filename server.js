@@ -19,6 +19,8 @@ var todos = [
     completed: true
   }
 ]
+
+var todoNextId = 3;
 // this middlewear is now for the whole app!
 // runs on every route no matter what.
 app.use(middlewear.requireAuthentication);
@@ -50,7 +52,17 @@ app.get('/todos/:id', function(req, res){
     }
 })
 
-
+app.post('/todos', function(req,res) {
+  var body = req.body;
+  // Challenge
+    // add id field
+    body.id = todoNextId;
+    todoNextId++;
+    // push body into array
+    // we just parsed body with id and now we want to persis that to temporary db.
+    todos.push(body);
+  res.json(body)
+})
 // this middlewear only runs on this request!
 app.get('/about', middlewear.logger, function (req, res) {
   res.send('<h1>Express About Page</h1>')

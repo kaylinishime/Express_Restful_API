@@ -63,3 +63,21 @@
      }
  })
 ```
+
+//Created POST /todos. First, had to initialize id
+`var todoNextId=3` Then require body. Attach the property id to the body and assign it to todoNextId. push the body to update our todos array.
+
+
+```javascript
+app.post('/todos', function(req,res) {
+  var body = req.body;
+  // Challenge
+    // add id field
+    body.id = todoNextId;
+    todoNextId++;
+    // push body into array
+    // we just parsed body with id and now we want to persis that to temporary db.
+    todos.push(body);
+  res.json(body)
+})
+```
