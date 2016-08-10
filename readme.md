@@ -33,7 +33,8 @@
 //Create a port that runs on heroku
   - var PORT = process.env.PORT || 3000;
   - deploy on heroku
-    1. git add, git commit, git push
+    1. git add, git commit, gte
+    it push
     2. heroku Create
     3. git push heroku master
     4. heroku open
@@ -44,4 +45,21 @@
 
  //Created 1st GET /todos & tested it with POSTMAN by creating Collection->Environment->Route
 
- 
+ //Created 2nd GET /todos/:id & tested it with POSTMAN & also pushed to HEROKU and created -Environment -> route
+
+ ```javascript
+ app.get('/todos/:id', function(req, res){
+   var todoId = parseInt(req.params.id)
+   var matchedTodo;
+   todos.forEach(function(todo){
+     if (todoId === todo.id) {
+       matchedTodo = todo;
+     }
+   })
+     if(matchedTodo) {
+       res.json(matchedTodo)
+     } else {
+       res.status(404).send();
+     }
+ })
+```
