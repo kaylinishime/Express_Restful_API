@@ -81,3 +81,18 @@ app.post('/todos', function(req,res) {
   res.json(body)
 })
 ```
+
+//REFACTOR using Underscore.js
+used findWhere function, which searches through todos array and finds the id that matches the route id. matchedTodo is now more easily defined, less lines of code.
+
+```javascript
+app.get('/todos/:id', function(req, res){
+  var todoId = parseInt(req.params.id)
+  var matchedTodo = _.findWhere(todos, {id: todoId})
+    if(matchedTodo) {
+      res.json(matchedTodo)
+    } else {
+      res.status(404).send();
+    }
+})
+```

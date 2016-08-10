@@ -4,6 +4,7 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
+var _ = require('underscore');
 var PORT = process.env.PORT || 3000;
 var middlewear = require('./middlewear')
 
@@ -39,12 +40,7 @@ app.get('/todos', function(req, res) {
 // creating a variable that will hold id from params object
 app.get('/todos/:id', function(req, res){
   var todoId = parseInt(req.params.id)
-  var matchedTodo;
-  todos.forEach(function(todo){
-    if (todoId === todo.id) {
-      matchedTodo = todo;
-    }
-  })
+  var matchedTodo = _.findWhere(todos, {id: todoId})
     if(matchedTodo) {
       res.json(matchedTodo)
     } else {
