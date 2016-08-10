@@ -2,19 +2,8 @@ var express = require('express');
 // creating an express app
 var app = express();
 var path = require('path');
-var PORT = 3000;
-
-// CUSTOM MIDDLEWARE
-var middlewear = {
-    requireAuthentication: function(req, res, next){
-      console.log('Request Auth Ran.')
-      next();
-    },
-    logger: function(req, res, next) {
-      console.log(req.method + req.originalURL + new Date().toString());
-      next();
-    }
-}
+var PORT = process.env.PORT || 3000;
+var middlewear = require('./middlewear')
 
 // this middlewear is now for the whole app!
 // runs on every route no matter what.

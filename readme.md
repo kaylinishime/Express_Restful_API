@@ -3,6 +3,7 @@
 
 
 mkdir app
+
     - npm init
 
     - npm install express --save
@@ -25,3 +26,6 @@ what is middlewear:
         app.get('/about', middlewear.logger, function (req, res) {
         res.send('<h1>Express About Page</h1>')
       })
+
+Why do we move code and export it and require it?
+  - module.exports = middlewear and we do this because its good practice to make the code easier to read (refactor it).
