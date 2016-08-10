@@ -96,3 +96,41 @@ app.get('/todos/:id', function(req, res){
     }
 })
 ```
+
+//POST TODOS WHY & WHAT is happening
+// taking description and completed and rejecting anything that is not those.
+<!-- // ._isBoolean & _.isString are Object functions that allows us to validate. We have the body object through body-parser.  -->
+
+
+```javascript
+app.post('/todos', function(req,res) {
+  var body = _.pick(req.body, 'description', 'completed');
+  if(!_.isBoolean(body.completed) || !_.isString(body.description) || body.description.trim().length === 0) {
+    return res.status(400).send();
+  }
+    body.description = body.description.trim();
+
+    body.id = todoNextId;
+    todoNextId++;
+    todos.push(body);
+  res.json(body)
+})
+```
+//create DELETE /TODOS/:id
+if not matched todo, return an error message. use without method-- the first argument is the array name & second argument is the values that we want removed. Which in this case is the matchedTodo.
+
+```javascript
+app.delete('/todos/:id' , function(req,res){
+  var todoId = parseInt(req.params.id);
+  var matchedTodo = _.findWhere(todos, {id: todoId});
+  // if not, no matchedTodo id.
+  if (!matchedTodo){
+    res.status(404).send();
+    // res.status(404)
+  } else {
+    todos = _.without(todos, matchedTodo );
+    // todos = _.without()
+  }
+  res.json(matchedTodo)
+})
+```
